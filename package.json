@@ -1,0 +1,26 @@
+{
+  "name": "blog-vmongoose",
+  "version": "1.0.0",
+  "description": "Desc",
+  "main": "models.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "mocha --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dttheme/Blog-VMongoose.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.7.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "mocha": "^4.0.1"
+  }
+}
