@@ -1,14 +1,15 @@
 'use strict';
 
 const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 
 const blogPostSchema = mongoose.Schema({
-  title: {type: String, required: true},
-  content: {type: String},
   author: {
     firstName: String,
     lastName: String,
   },
+  title: {type: String, required: true},
+  content: {type: String},
   created: {type: Date, default: Date.now}
 })
 
@@ -19,9 +20,9 @@ blogPostSchema.virtual('authorString').get(function() {
 blogPostSchema.methods.serialize = function() {
   return {
     id: this._id,
+    author: this.authorString,
     title: this.title,
     content: this.content,
-    author: this.authorString,
     created: this.created
   };
 }

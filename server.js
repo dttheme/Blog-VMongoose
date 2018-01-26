@@ -15,7 +15,7 @@ const app = express();
 app.use(morgan('common'));
 app.use(bodyParser.json());
 
-app.get('/blog-posts', (req, res) => {
+app.get('/posts', (req, res) => {
   BlogPost
     .find()
     .then(posts => {
@@ -27,7 +27,7 @@ app.get('/blog-posts', (req, res) => {
     });
 });
 
-app.get('/blog-posts/:id', (req, res) => {
+app.get('/posts/:id', (req, res) => {
   BlogPost
     .findById(req.params.id)
     .then(post => res.json(post.serialize()))
@@ -37,7 +37,7 @@ app.get('/blog-posts/:id', (req, res) => {
     });
 });
 
-app.post('/blog-posts', (req, res) => {
+app.post('/posts', (req, res) => {
   const requiredFields = ['title', 'content', 'author'];
     for(let i=0; i< requiredFields.length; i++) {
       const field = requiredFields[i];
@@ -61,7 +61,7 @@ app.post('/blog-posts', (req, res) => {
       });
 });
 
-app.put('/blog-posts/:id', (req, res) => {
+app.put('/posts/:id', (req, res) => {
     if(!(req.params.id && req.body.id && req.params.id === req.body.id)) {
       const message = (
         `Request path id (${req.params.id}) amd request body id (${req.body.id}) must match`);
@@ -83,7 +83,7 @@ app.put('/blog-posts/:id', (req, res) => {
 
 });
 
-app.delete('/blog-posts/:id', (req, res) => {
+app.delete('/posts/:id', (req, res) => {
   BlogPost
   .findByIdAndRemove(req.params.id)
   .then(blog_post => res.status(204).end())
