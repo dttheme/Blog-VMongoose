@@ -18,14 +18,9 @@ app.use(bodyParser.json());
 app.get('/blog-posts', (req, res) => {
   BlogPost
     .find()
-    .limit(10)
-    .then(blog_posts => {
-      res.json({
-          blog_posts: blog_posts.map(
-          (blog_post) => blog_post.serialize()
-        )
-      });
-    })
+    .then(posts => {
+      res.json(posts.map(post => post.serialize()));
+      })
     .catch(err => {
       console.error(err);
       res.status(500).json({message: 'Internal server error'});
@@ -35,12 +30,12 @@ app.get('/blog-posts', (req, res) => {
 app.get('/blog-posts/:id', (req, res) => {
   BlogPost
     .findById(req.params.id)
-    .then(blog_post => res.json(blog_post.serialize()))
+    .then(post => res.json(post.serialize()))
     .catch(err => {
       console.error(err);
       res.status(500).json({message: "Internal server error"});
-    })
-})
+    });
+});
 
 app.post('/blog-posts', (req, res) => {
   const requiredFields = ['title', 'content', 'author'];
